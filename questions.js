@@ -49,7 +49,7 @@ const questions = [
     },
     {
         chapter:1,
-        lection:2,
+        lection:1,
         name: "Какой компонент учитывает физическое состояние и характеристики агента, изменяющиеся в текущей ситуации в зависимости от внутренних связей и внешней информации",
         possibleAnswers: [
             "Сенсор",
@@ -62,339 +62,338 @@ const questions = [
     {
         chapter:1,
         lection:2,
-        name: " ?",
+        name: "Кто создатель игры Жизнь ?",
         possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
+            "Джон Конвей",
+            "Мартин Гарднер",
+            "Джон фон Нейман",
+            "Ада Лавлейс"
         ],
-        correctAnswer: ""
+        correctAnswer: "Джон Конвей"
     },
     {
         chapter:1,
         lection:2,
-        name: " ?",
+        name: "Какая из ситуаций приводит к завершению игры ?",
         possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
+            "Если на поле не останется ни одной «живой» клетки",
+            "Если при очередном шаге ни одна из клеток не меняет своего состояния",
+            "Если конфигурация на очередном шаге в точности повторит себя же на одном из более ранних шагов",
+            "Все варианты ответов верны"
         ],
-        correctAnswer: ""
+        correctAnswer: "Все варианты ответов верны"
     },
     {
         chapter:1,
         lection:2,
-        name: " ?",
+        name: "Сколько массивов используется для реализации простейшго алгоритма «смены поколения»  ?",
         possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
+            "1",
+            "2",
+            "3",
+            "4"
         ],
-        correctAnswer: ""
+        correctAnswer: "2"
     },
     {
         chapter:1,
         lection:2,
-        name: " ?",
+        name: "От чего зависит привлекательность поля в модифицированной игре Жизнь ?",
         possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
+            "От положения клетки",
+            "От генома соседних клеток",
+            "От генома текущей клетки"
         ],
-        correctAnswer: ""
+        correctAnswer: "От генома текущей клетки"
     },
-    {
-        chapter:1,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:1,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:1,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:1,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:1,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:1,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:1,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:1,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:1,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:1,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:1,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:1,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:2,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:2,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:2,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:2,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:3,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
-    {
-        chapter:2,
-        lection:4,
-        name: " ?",
-        possibleAnswers: [
-            "",
-            "",
-            "",
-            ""
-        ],
-        correctAnswer: ""
-    },
+    // {
+    //     chapter:1,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:1,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:1,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:1,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:1,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:1,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:1,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:1,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:1,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:1,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:1,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:1,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:2,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:2,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:2,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:2,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:3,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
+    // {
+    //     chapter:2,
+    //     lection:4,
+    //     name: " ?",
+    //     possibleAnswers: [
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ],
+    //     correctAnswer: ""
+    // },
 
 
 ]
