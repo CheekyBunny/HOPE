@@ -1,5 +1,5 @@
 // Подключаем модуль с фразами
-const { helloMessage, exitMessage, stopWords, goodAnswerWords, badAnswerWords } = require("./phrases");
+const { helloMessage, exitMessage, stopWords, goodAnswerWords, badAnswerWords, helpWords, helpMessage, okeyWords, notUnderstandMessage } = require("./phrases");
 
 // Подключаем модуль с вопросами
 const questions = require("./questions");
@@ -65,27 +65,45 @@ function handleRequest(request, response) {
         return;
     }
 
-    // Для всех других сообщений игра уже создана, пытаемся найти ее
-    let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
-
-    // Если игра вдруг почему-то не найдена или все вопросы закончились - показываем сообщение о конце игры.
-    if (!game || game.counter >= game.questions.length-1) {
+    // Обработка вопроса "что ты умеешь?"
+    if (helpWords.includes(request.body.request.command.toLowerCase())) {
+        // Возвращаем ответ в виде объекта, функция json() потом его превратит в формат JSON
         response.json({
             version: request.body.version,
             session: request.body.session,
             response: {
-                // Если с игрой все ок, то выводим также финальный счет
-                text: (game ? `Ваш финальный счет - ${game.score} из ${game.questions.length}!` : "") + exitMessage,
-                end_session: true,
+                text: helpMessage,
+                end_session: false,
             },
         });
+
+        // Запрос обработан, завершаем функцию
         return;
+    }
+
+    // Для всех других сообщений игра уже создана, пытаемся найти ее
+    let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
+
+    if (game && game.state === "NotStarted") {
+        if (!okeyWords.includes(request.body.request.command.toLowerCase())) {
+            response.json({
+                version: request.body.version,
+                session: request.body.session,
+                response: {
+                    text: notUnderstandMessage,
+                    end_session: false,
+                },
+            });
+
+            // Запрос обработан, завершаем функцию
+            return;
+        }
     }
 
     let message = "";
 
     // Если игра уже запущена
-    if (game.state === "Started") {
+    if (game && game.state === "Started") {
         if (game.questions[game.counter].correctAnswer === request.body.request.original_utterance) {
             // Если ответ дали верный, то увеличиваем счет.
             game.score++;
@@ -98,8 +116,22 @@ function handleRequest(request, response) {
         }
     }
 
+    // Если игра вдруг почему-то не найдена или все вопросы закончились - показываем сообщение о конце игры.
+    if (!game || game.counter >= game.questions.length - 1) {
+        response.json({
+            version: request.body.version,
+            session: request.body.session,
+            response: {
+                // Если с игрой все ок, то выводим также финальный счет
+                text: message + (game ? `Ваш финальный счет - ${game.score} из ${game.questions.length}!` : "") + exitMessage,
+                end_session: true,
+            },
+        });
+        return;
+    }
+
     // Увеличиваем счетчик вопроса
-    if (game.state === "Started" && game.counter < game.questions.length-1) {
+    if (game.state === "Started" && game.counter < game.questions.length - 1) {
         game.counter++;
     }
     else {
@@ -112,7 +144,7 @@ function handleRequest(request, response) {
         session: request.body.session,
         response: {
             text: message + game.questions[game.counter].name, // Выводим сообщение и следующий вопрос
-            buttons: game.questions[game.counter].possibleAnswers.map(a => ({ title: a })),
+            buttons: shuffle(game.questions[game.counter].possibleAnswers).map(a => ({ title: a })),
             // Выводим возможные ответы в виде кнопок
             end_session: false,
         },
