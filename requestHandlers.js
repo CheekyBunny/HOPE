@@ -15,6 +15,8 @@ const getRandomElement = require("./getRandomElement");
 // Изначально список сессий у нас пустой, но дальше он будет изменяться.
 const sessions = [];
 
+const QUESTIONS_COUNT = 10;
+
 
 /**
  * Функция бработки сообщения, распознанного от Алисы
@@ -47,7 +49,7 @@ function handleRequest(request, response) {
         sessions.push({
             sessionId: request.body.session.session_id,
             score: 0,
-            questions: shuffle(questions), // Для каждого игрока массив вопросов будет перемешан
+            questions: shuffle(questions).slice(0, QUESTIONS_COUNT), // Для каждого игрока массив вопросов будет перемешан
             counter: 0,
             state: "NotStarted"
         })
