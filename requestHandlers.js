@@ -125,7 +125,7 @@ function handleRequest(request, response) {
             session: request.body.session,
             response: {
                 // Если с игрой все ок, то выводим также финальный счет
-                text: message + (game ? `Ваш финальный счет - ${game.score} из ${game.questions.length}!` : "") + exitMessage,
+                text: message + (game ? `Ваш фин+альный счет - ${game.score} из ${game.questions.length}! ` : " ") + exitMessage,
                 end_session: true,
             },
         });
