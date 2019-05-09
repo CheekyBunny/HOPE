@@ -1,4 +1,5 @@
 const { okeyWords } = require("../phrases");
+const sanitizeText = require("../tts/sanitizeText");
 // Подключаем модуль с функцией перемешивания массива
 const shuffle = require("../shuffle");
 
@@ -27,7 +28,8 @@ const ChooseGameHandler = {
             version: request.body.version,
             session: request.body.session,
             response: {
-                text: message + game.questions[game.counter].name, // Выводим сообщение и следующий вопрос
+                tts: message + game.questions[game.counter].name,
+                text: sanitizeText(message + game.questions[game.counter].name), // Выводим сообщение и следующий вопрос
                 buttons: shuffle(game.questions[game.counter].possibleAnswers).map(a => ({ title: a })),
                 // Выводим возможные ответы в виде кнопок
                 end_session: false,

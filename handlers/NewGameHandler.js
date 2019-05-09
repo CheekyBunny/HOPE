@@ -2,6 +2,8 @@ const { helloMessage } = require("../phrases");
 // Подключаем модуль с вопросами
 const questions = require("../questions");
 
+const sanitizeText = require("../tts/sanitizeText");
+
 // Подключаем модуль с функцией перемешивания массива
 const shuffle = require("../shuffle");
 
@@ -29,7 +31,8 @@ const NewGameHandler = {
             version: request.body.version,
             session: request.body.session,
             response: {
-                text: helloMessage,
+                text: sanitizeText(helloMessage),
+                tts: helloMessage,
                 end_session: false,
             },
         });

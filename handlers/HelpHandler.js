@@ -1,5 +1,6 @@
 // Подключаем модуль с фразами
 const { helpWords, helpMessage } = require("../phrases");
+const sanitizeText = require("../tts/sanitizeText");
 
 const HelpHandler = {
     canHandle(request) {
@@ -14,7 +15,8 @@ const HelpHandler = {
             version: request.body.version,
             session: request.body.session,
             response: {
-                text: helpMessage,
+                tts: helpMessage,
+                text: sanitizeText(helpMessage),
                 end_session: false,
             },
         });

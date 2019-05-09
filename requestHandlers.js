@@ -4,6 +4,7 @@ const { notUnderstandMessage } = require("./phrases");
 // Подключаем модуль с обработчиками
 const handlers = require("./handlers/handlers");
 
+const sanitizeText = require('./tts/sanitizeText');
 // Список сессий и игр. Храним их массив на сервере. 
 // Элементы данного массива - объекты с параметры игры(id сессии, счет игры, номер вопроса и сами вопросы)
 // Изначально список сессий у нас пустой, но дальше он будет изменяться.
@@ -34,7 +35,8 @@ function handleRequest(request, response) {
         version: request.body.version,
         session: request.body.session,
         response: {
-            text: notUnderstandMessage,
+            tts: notUnderstandMessage,
+            text: sanitizeText(notUnderstandMessage),
             end_session: false,
         },
     });

@@ -1,5 +1,7 @@
 const { exitMessage, stopWords } = require("../phrases");
 
+const sanitizeText = require("../tts/sanitizeText");
+
 const StopGameHandler = {
     canHandle(request, sessions) {
         if (stopWords.includes(request.body.request.command.toLowerCase())){
@@ -13,7 +15,8 @@ const StopGameHandler = {
             version: request.body.version,
             session: request.body.session,
             response: {
-                text: exitMessage,
+                tts: exitMessage,
+                text: sanitizeText(exitMessage),
                 end_session: true,
             },
         });
