@@ -41,6 +41,7 @@ const StartMissingWordsHandler = {
         game.state = 'MissingWordsChoosen';
 
         game.fullPhrase = definition.definition;
+        game.missingWords = 0;
 
         response.json({
             version: request.body.version,

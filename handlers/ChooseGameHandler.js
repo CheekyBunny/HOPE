@@ -7,7 +7,7 @@ const ChooseGameHandler = {
     canHandle(request, sessions) {
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
-        if (game && game.state === "NotStarted"){
+        if (game && game.state === "NotStarted" || game.state === "ChooseGame"){
             return true;
         }
 
