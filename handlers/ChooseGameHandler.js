@@ -1,4 +1,4 @@
-const { okeyWords } = require("../phrases");
+const { missingWordsAnswers, quizAnswers, notUnderstandMessage, startQuizMessage, startMissingWordsMessage } = require("../phrases");
 const sanitizeText = require("../tts/sanitizeText");
 // Подключаем модуль с функцией перемешивания массива
 const shuffle = require("../shuffle");
@@ -7,7 +7,7 @@ const ChooseGameHandler = {
     canHandle(request, sessions) {
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
-        if (game && game.state === "NotStarted" && okeyWords.includes(request.body.request.command.toLowerCase())){
+        if (game && game.state === "NotStarted"){
             return true;
         }
 
@@ -19,8 +19,34 @@ const ChooseGameHandler = {
 
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
-        if(game.state!=='Quiz') {
-            game.state = 'Quiz'
+        if(quizAnswers.includes(request.body.request.command.toLowerCase()))
+        {
+            game.state = 'QuizStarting';
+
+            response.json({
+                version: request.body.version,
+                session: request.body.session,
+                response: {
+                    tts: startQuizMessage,
+                    text: sanitizeText(startQuizMessage),
+                    end_session: false,
+                },
+            });
+        }
+
+        if(missingWordsAnswers.includes(request.body.request.command.toLowerCase()))
+        {
+            game.state = 'MissingWordsStarting';
+
+            response.json({
+                version: request.body.version,
+                session: request.body.session,
+                response: {
+                    tts: startMissingWordsMessage,
+                    text: sanitizeText(startMissingWordsMessage),
+                    end_session: false,
+                },
+            });
         }
 
         // Возвращаем ответ в виде объекта, функция json() потом его превратит в формат JSON
@@ -28,10 +54,8 @@ const ChooseGameHandler = {
             version: request.body.version,
             session: request.body.session,
             response: {
-                tts: message + game.questions[game.counter].name,
-                text: sanitizeText(message + game.questions[game.counter].name), // Выводим сообщение и следующий вопрос
-                buttons: shuffle(game.questions[game.counter].possibleAnswers).map(a => ({ title: a })),
-                // Выводим возможные ответы в виде кнопок
+                tts: notUnderstandMessage,
+                text: sanitizeText(notUnderstandMessage),
                 end_session: false,
             },
         });
