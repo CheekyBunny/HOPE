@@ -3,8 +3,9 @@ const { exitMessage, goodAnswerWords, badAnswerWords } = require("../phrases");
 const shuffle = require("../shuffle");
 // Подключаем модуль с функцией получения случайного элемента
 const getRandomElement = require("../getRandomElement");
-
+const Sounds = require("../tts/sounds");
 const sanitizeText = require("../tts/sanitizeText");
+const { similarity, DEFAULT_SIMILARITY } = require('../core/similarity');
 
 const QuizHandler = {
     canHandle(request, sessions) {
@@ -21,21 +22,24 @@ const QuizHandler = {
 
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
-        // Если игра уже запущена
-        if (game.questions[game.counter].correctAnswer === request.body.request.original_utterance) {
+        if (similarity(
+            game.questions[game.counter].correctAnswer.trim().toLowerCase(), 
+            request.body.request.original_utterance.trim().toLowerCase()
+            ) > DEFAULT_SIMILARITY
+        ) {
             // Если ответ дали верный, то увеличиваем счет.
             game.score++;
             // Выводим случайное радостное сообщение и счет.
-            message = getRandomElement(goodAnswerWords) + ` Ваш счет ${game.score} из ${game.questions.length}!`;
+            message = Sounds.positive + getRandomElement(goodAnswerWords) + ` Ваш счет ${game.score} из ${game.questions.length}!`;
         }
         else {
             // Выводим случайное досадное сообщение и счет.
-            message = getRandomElement(badAnswerWords) + ` Ваш счет ${game.score} из ${game.questions.length}!`;
+            message = Sounds.negative + getRandomElement(badAnswerWords) + ` Ваш счет ${game.score} из ${game.questions.length}!`;
         }
 
         // Если все вопросы закончились - показываем сообщение о конце игры.
         if (game.counter >= game.questions.length - 1) {
-            let finalMessage =  message + (game ? ` Ваш фин+альный счет - ${game.score} из ${game.questions.length}! ` : " ") + exitMessage;
+            let finalMessage = message + (game ? ` Ваш фин+альный счет - ${game.score} из ${game.questions.length}! ` : " ") + exitMessage;
 
             response.json({
                 version: request.body.version,

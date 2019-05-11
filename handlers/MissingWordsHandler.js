@@ -1,11 +1,12 @@
 const { okeyWords } = require("../phrases");
 const sanitizeText = require("../tts/sanitizeText");
 const getPartOfPhrase = require("../core/getPartOfPhrase");
-// Подключаем модуль с функцией перемешивания массива
 const Sounds = require("../tts/sounds");
 const { goodAnswerWords, badAnswerWords } = require("../phrases");
 // Подключаем модуль с функцией получения случайного элемента
 const getRandomElement = require("../getRandomElement");
+
+const { similarity, DEFAULT_SIMILARITY } = require('../core/similarity');
 
 const MissingWordsHandler = {
     canHandle(request, sessions) {
@@ -45,12 +46,12 @@ const MissingWordsHandler = {
             let missedWord = sanitizeText(game.missedWord || "");
             let word = sanitizeText(request.body.request.command.toLowerCase());
 
-            if (word === missedWord.toLowerCase().trim()) {
+            if (similarity(word, missedWord.toLowerCase().trim()) > DEFAULT_SIMILARITY) {
                 game.score += 1;
-                message = getRandomElement(goodAnswerWords) + `. Ваш счет ${game.score} из ${game.missingWords}! `;
+                message = Sounds.positive + getRandomElement(goodAnswerWords) + `. Ваш счет ${game.score} из ${game.missingWords}! `;
             }
             else {
-                message = getRandomElement(badAnswerWords) + `. Правильный ответ - ${missedWord}. Идем дальше. `;
+                message = Sounds.negative + getRandomElement(badAnswerWords) + `. Правильный ответ - ${missedWord}. Идем дальше. `;
             }
         }
 
@@ -71,6 +72,7 @@ const MissingWordsHandler = {
                 version: request.body.version,
                 session: request.body.session,
                 response: {
+                    tts: aliceMessage,
                     text: sanitizeText(aliceMessage),
                     end_session: false,
                 },
@@ -93,8 +95,8 @@ const MissingWordsHandler = {
             version: request.body.version,
             session: request.body.session,
             response: {
-                tts: sanitizeText(message + game.phraseToSay) + Sounds.ping,
-                text: message + game.phraseToSay, // Выводим сообщение и следующий вопрос
+                text: sanitizeText(message + game.phraseToSay),
+                tts: message + game.phraseToSay + Sounds.ping, // Выводим сообщение и следующий вопрос
                 end_session: false,
             },
         });

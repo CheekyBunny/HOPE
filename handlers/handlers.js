@@ -10,8 +10,8 @@ const MissingWordsHandler = require('./MissingWordsHandler')
 module.exports  = [
     StopGameHandler,
     NewGameHandler,
-    ChooseGameHandler,
     HelpHandler,
+    ChooseGameHandler,
     StartQuizHandler,
     StartMissingWordsHandler,
     QuizHandler,

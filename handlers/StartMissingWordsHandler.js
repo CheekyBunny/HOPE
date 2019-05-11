@@ -43,11 +43,14 @@ const StartMissingWordsHandler = {
         game.fullPhrase = definition.definition;
         game.missingWords = 0;
 
+        const textToSay = `Вот полное определение: ${game.fullPhrase}. Вы готовы начать игру?`
+
         response.json({
             version: request.body.version,
             session: request.body.session,
             response: {
-                text: "Вы готовы начать игру?", // Выводим сообщение и следующий вопрос
+                tts: textToSay,
+                text: sanitizeText(textToSay), // Выводим сообщение и следующий вопрос
                 end_session: false,
             },
         });
