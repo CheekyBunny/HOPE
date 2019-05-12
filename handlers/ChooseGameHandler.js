@@ -19,7 +19,7 @@ const ChooseGameHandler = {
 
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
-        if(quizAnswers.includes(request.body.request.command.toLowerCase()))
+        if(quizAnswers.includes(sanitizeText(request.body.request.command.toLowerCase())))
         {
             game.state = 'QuizStarting';
 
@@ -34,7 +34,7 @@ const ChooseGameHandler = {
             });
         }
 
-        if(missingWordsAnswers.includes(request.body.request.command.toLowerCase()))
+        if(missingWordsAnswers.includes(sanitizeText(request.body.request.command.toLowerCase())))
         {
             game.state = 'MissingWordsStarting';
 

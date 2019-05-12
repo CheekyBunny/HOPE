@@ -19,7 +19,7 @@ const StartMissingWordsHandler = {
 
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
-        let pronouncedDefinition = request.body.request.command.trim().toLowerCase();
+        let pronouncedDefinition = sanitizeText(request.body.request.command.trim().toLowerCase());
 
         let definition = definitions.find((s)=>s.name.trim().toLowerCase() === pronouncedDefinition);
 

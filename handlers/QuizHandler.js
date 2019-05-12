@@ -24,7 +24,7 @@ const QuizHandler = {
 
         if (similarity(
             game.questions[game.counter].correctAnswer.trim().toLowerCase(), 
-            request.body.request.original_utterance.trim().toLowerCase()
+            sanitizeText(request.body.request.original_utterance.trim().toLowerCase())
             ) > DEFAULT_SIMILARITY
         ) {
             // Если ответ дали верный, то увеличиваем счет.
