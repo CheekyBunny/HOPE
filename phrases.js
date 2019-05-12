@@ -69,6 +69,7 @@ const quizAnswers = [
     "первое",
     "первую",
     "в первую",
+    "в 1"
 ]
 
 const missingWordsAnswers = [
@@ -79,7 +80,9 @@ const missingWordsAnswers = [
     "угадывать слово",
     "второе",
     "во вторую",
-    "вторую"
+    "вторую",
+    "в 2",
+    "во 2"
 ]
 
 const notUnderstandMessage = "Извините,я вас не понимаю." + helpMessage;
