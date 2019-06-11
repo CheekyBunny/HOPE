@@ -4,7 +4,9 @@ const sanitizeText = require("../tts/sanitizeText");
 
 const HelpHandler = {
     canHandle(request) {
-        if (helpWords.includes(request.body.request.command.toLowerCase())) {
+        let saidWord = sanitizeText(request.body.request.command.toLowerCase(), true);
+        
+        if (helpWords.includes(saidWord)) {
             return true;
         }
         return false;
