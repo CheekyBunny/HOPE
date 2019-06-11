@@ -19,7 +19,7 @@ const StartMissingWordsHandler = {
 
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
-        let pronouncedDefinition = sanitizeText(request.body.request.command.trim().toLowerCase());
+        let pronouncedDefinition = sanitizeText(request.body.request.command.trim().toLowerCase(), true);
 
         let definition = definitions.find((s)=>s.name.trim().toLowerCase() === pronouncedDefinition);
 
@@ -43,7 +43,7 @@ const StartMissingWordsHandler = {
         game.fullPhrase = definition.definition;
         game.missingWords = 0;
 
-        const textToSay = `Вот полное определение: ${game.fullPhrase}. Вы готовы начать игру?`
+        const textToSay = `Вот полное определение: ${game.fullPhrase.replace(/#/g, '')}. Вы готовы начать игру?`
 
         response.json({
             version: request.body.version,

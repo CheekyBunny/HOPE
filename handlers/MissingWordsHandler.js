@@ -5,7 +5,7 @@ const Sounds = require("../tts/sounds");
 const { goodAnswerWords, badAnswerWords } = require("../phrases");
 // Подключаем модуль с функцией получения случайного элемента
 const getRandomElement = require("../getRandomElement");
-
+const generateImage = require("../image/generateImage")
 const { similarity, DEFAULT_SIMILARITY } = require('../core/similarity');
 
 const MissingWordsHandler = {
@@ -19,13 +19,15 @@ const MissingWordsHandler = {
         return false;
     },
 
-    handle(request, response, sessions) {
+    async handle(request, response, sessions) {
         let message = "";
+
+        let saidWord = sanitizeText(request.body.request.command.toLowerCase().trim(), true);
 
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
 
         if (game.state === "MissingWordsChoosen") {
-            if (!okeyWords.includes(request.body.request.command.toLowerCase())) {
+            if (!okeyWords.includes(saidWord)) {
                 // Возвращаем ответ в виде объекта, функция json() потом его превратит в формат JSON
                 response.json({
                     version: request.body.version,
@@ -44,7 +46,7 @@ const MissingWordsHandler = {
         if (game.state === `MissingWords`) {
 
             let missedWord = sanitizeText(game.missedWord || "");
-            let word = sanitizeText(request.body.request.command.toLowerCase());
+            let word = saidWord;
 
             if (similarity(word, missedWord.toLowerCase().trim()) > DEFAULT_SIMILARITY) {
                 game.score += 1;
@@ -56,7 +58,7 @@ const MissingWordsHandler = {
         }
 
         if (game.state === "MissingWordsChoosen") {
-            if (okeyWords.includes(request.body.request.command.toLowerCase())) {
+            if (okeyWords.includes(saidWord)) {
                 game.state = "MissingWords"
             }
         }
@@ -66,15 +68,25 @@ const MissingWordsHandler = {
         if ((game.remainingPhrase).indexOf('#') < 0) {
             game.state = "ChooseGame";
 
-            const aliceMessage = message + game.remainingPhrase + `. Определение закончилось. Ваш счет - ${game.score} очков. Хотите сыграть снова?`;
+            const aliceMessage = message + game.remainingPhrase + `. Определение закончилось. Ваш счет - ${game.score} очков. Надеюсь мы сыграем снова.`;
+
+            const imageId = await generateImage(game.fio, game.group, game.score, undefined);
 
             response.json({
                 version: request.body.version,
                 session: request.body.session,
                 response: {
+                    card: {
+                        type: "BigImage",
+                        image_id: imageId,
+                        title: "Результат",
+                        button:{
+                            url: `https://avatars.mds.yandex.net/get-dialogs-skill-card/${imageId}/one-x4`
+                        }
+                      },
                     tts: aliceMessage,
                     text: sanitizeText(aliceMessage),
-                    end_session: false,
+                    end_session: true,
                 },
             });
 
