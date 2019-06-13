@@ -2,6 +2,7 @@ const { missingWordsAnswers, quizAnswers, notUnderstandMessage, startQuizMessage
 const sanitizeText = require("../tts/sanitizeText");
 // Подключаем модуль с функцией перемешивания массива
 const shuffle = require("../shuffle");
+const definitions = require("../definitions");
 
 const ChooseGameHandler = {
     canHandle(request, sessions) {
@@ -46,6 +47,7 @@ const ChooseGameHandler = {
                 response: {
                     tts: startMissingWordsMessage,
                     text: sanitizeText(startMissingWordsMessage),
+                    buttons: shuffle(definitions).slice(0,5).map(a => ({ title: a.name })),
                     end_session: false,
                 },
             });

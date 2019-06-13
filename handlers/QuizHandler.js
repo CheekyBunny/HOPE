@@ -6,6 +6,7 @@ const getRandomElement = require("../getRandomElement");
 const Sounds = require("../tts/sounds");
 const sanitizeText = require("../tts/sanitizeText");
 const { similarity, DEFAULT_SIMILARITY } = require('../core/similarity');
+const generateImage = require("../image/generateImage")
 
 const QuizHandler = {
     canHandle(request, sessions) {
@@ -17,7 +18,7 @@ const QuizHandler = {
         return false;
     },
 
-    handle(request, response, sessions) {
+    async handle(request, response, sessions) {
         let message = "";
 
         let game = sessions.find((s) => s.sessionId === request.body.session.session_id);
@@ -41,13 +42,23 @@ const QuizHandler = {
         if (game.counter >= game.questions.length - 1) {
             let finalMessage = message + (game ? ` Ваш фин+альный счет - ${game.score} из ${game.questions.length}! ` : " ") + exitMessage;
 
+            const imageId = await generateImage(game.fio, game.group, game.score, game.questions.length);
+
             response.json({
                 version: request.body.version,
                 session: request.body.session,
                 response: {
-                    // Если с игрой все ок, то выводим также финальный счет
-                    text: sanitizeText(finalMessage),
+                    card: {
+                        type: "BigImage",
+                        image_id: imageId,
+                        title: "Результат",
+                        description: sanitizeText(finalMessage),
+                        button:{
+                            url: `https://avatars.mds.yandex.net/get-dialogs-skill-card/${imageId}/one-x4`
+                        }
+                      },
                     tts: finalMessage,
+                    text: sanitizeText(finalMessage),
                     end_session: true,
                 },
             });
