@@ -24,7 +24,7 @@ const NewGameHandler = {
             score: 0,
             questions: shuffle(questions).slice(0, QUESTIONS_COUNT), // Для каждого игрока массив вопросов будет перемешан
             counter: 0,
-            state: "NotStarted"
+            state: "FillName"
         })
         // Возвращаем ответ в виде объекта, функция json() потом его превратит в формат JSON
         response.json({

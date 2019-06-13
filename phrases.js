@@ -1,5 +1,9 @@
 const helloMessage = `Привет! Вы можете сыграть со мной в викторину по моделированию, либо угадать пропущенные слова в определениях. Нужно правильно отвечать и набирать очки.
-Для завершения игр+ы скажите "конец игр+ы". В какую игру вы хотите сыграть?`;
+Для завершения игр+ы скажите "конец игр+ы". Введ+ите пож+алуйста свое имя.`;
+
+const selectGroupMessage = `Введ+ите пож+алуйста свою гр+уппу.`;
+
+const selectGameMessage = `В как+ую игр+у вы хот+ите сыграть?`;
 
 const exitMessage = `Пок+а! Над+еюсь мы поигр+аем сн+ова.`
 
@@ -101,5 +105,7 @@ module.exports = {
     quizAnswers,
     startQuizMessage,
     startMissingWordsMessage,
-    noSuchDefinitionMessage
+    noSuchDefinitionMessage,
+    selectGroupMessage,
+    selectGameMessage
 }

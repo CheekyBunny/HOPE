@@ -4,7 +4,9 @@ const sanitizeText = require("../tts/sanitizeText");
 
 const StopGameHandler = {
     canHandle(request, sessions) {
-        if (stopWords.includes(request.body.request.command.toLowerCase())){
+        let saidWord = sanitizeText(request.body.request.command.toLowerCase(), true);
+
+        if (stopWords.includes(saidWord)) {
             return true;
         }
         return false;
