@@ -24,7 +24,14 @@ async function generateImage(fio, group, points, maxPoints) {
     ctx.fillText(group,70,540);
 
     ctx.font = '72px sans-serif';
-    ctx.fillText(`${points} очков`,700,420);
+    
+
+    if(!maxPoints) {
+        ctx.fillText(`${points} очков`,700,420);
+    }
+    else{
+        ctx.fillText(`${points}/${maxPoints}`,700,420)
+    }
 
     let buffer = canvas.toBuffer('image/png');
 

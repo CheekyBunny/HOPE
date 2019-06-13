@@ -80,6 +80,7 @@ const MissingWordsHandler = {
                         type: "BigImage",
                         image_id: imageId,
                         title: "Результат",
+                        description: sanitizeText(aliceMessage),
                         button:{
                             url: `https://avatars.mds.yandex.net/get-dialogs-skill-card/${imageId}/one-x4`
                         }
