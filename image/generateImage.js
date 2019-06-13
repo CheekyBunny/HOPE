@@ -2,10 +2,10 @@ const { loadImage, Canvas } = require('canvas')
 const request = require('request-promise')
 
 
-//const SKILL_ID = `64cea988-9e51-4590-b72c-80c38e5ad700`;
-const SKILL_ID = `f8914ca6-5a36-4cdc-9808-a525061d116a`
-//const OAUTH_TOKEN = `AgAAAAAT7T_HAAT7o7rNdspspkCSg4qZfQZ6I08`;
-const OAUTH_TOKEN = `AgAAAAATzRvNAAT7ozME1uw_TEdwom-xPXB1HS8`
+const SKILL_ID = `64cea988-9e51-4590-b72c-80c38e5ad700`;
+//const SKILL_ID = `f8914ca6-5a36-4cdc-9808-a525061d116a`
+const OAUTH_TOKEN = `AgAAAAAT7T_HAAT7o7rNdspspkCSg4qZfQZ6I08`;
+//const OAUTH_TOKEN = `AgAAAAATzRvNAAT7ozME1uw_TEdwom-xPXB1HS8`
 
 async function generateImage(fio, group, points, maxPoints) {
     const img = await loadImage('./image/template.jpg');
